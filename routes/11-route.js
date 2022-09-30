@@ -14,12 +14,21 @@ const takeBook = require('../controllers/05-controller')
 
 router.get('/book/:id', (req, res) => {
   try {
-    const { id, quantity } = req.body;
+    const { id } = req.params;
+    const { quantity } = req.query;
     const book = takeBook(id, quantity);
-    res.json(book);
+    res.status(200).json(book);
     
   } catch (error) {
-    res.status(400).json({error: error.message});
+    if(error.message === 'Libro no encontrado') {
+      res.status(404).json({message: error.message});
+    }
+    if(error.message === 'La cantidad de libros solicitados supera el stock') {
+      res.status(400).json({"message": "La cantidad solicitada supera el stock"})
+    }
+    else{
+      res.status(400).json({message: error.message})
+    }
   }
 })
 
