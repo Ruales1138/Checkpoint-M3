@@ -20,34 +20,17 @@ const utils = require("../utils");
 
 const findBook = (book) => {
   // ⚠️ No modificar nada arriba de esta línea ⚠️
-  let filteredBook = utils.books.find(e => e.id === book.id)
-
-  if(!filteredBook) throw new Error('no se encontro el libro solicitado')
-  else{
-    if(
-    !book.id || 
-    !book.name || 
-    !book.author || 
-    !book.stock || 
-    !book.available || 
-    !book.rating || 
-    !book.admission || 
-    !book.genre
-    ) {
-      throw new Error('falta completar datos')
-    }
-    else {
-      filteredBook.id = book.id;
-      filteredBook.name = book.name;
-      filteredBook.author = book.author;
-      filteredBook.stock = book.stock;
-      filteredBook.available = book.available;
-      filteredBook.rating = book.rating;
-      filteredBook.admission = book.admission;
-      filteredBook.genre = book.genre;
-    }
-    return filteredBook
+  const foundIndex = utils.books.findIndex((e) => e.id === book.id);
+  if (foundIndex === -1) {
+    throw Error("no se encontro el libro solicitado");
   }
+  if (!book.name || !book.rating || !book.genre) {
+    throw Error("falta completar datos");
+  }
+  utils.books[foundIndex].name = book.name;
+  utils.books[foundIndex].rating = book.rating;
+  utils.books[foundIndex].genre = book.genre;
+  return utils.books[foundIndex];
 }; 
 
 // ⚠️ No modificar nada debajo de esta línea ⚠️

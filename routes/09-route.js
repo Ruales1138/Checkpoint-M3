@@ -13,7 +13,16 @@ const findBook = require("../controllers/03-controller");
     - Si algo falla al traer los books, debes responder con el mensaje del error!
 */
 
-// router.put("/books", (req, res) => {});
+router.put("/books", (req, res) => {
+  try {
+    const { book } = req.body;
+    const update = findBook(book);
+    res.json({ message: "Libro actualizado correctamente",})
+    
+  } catch (error) {
+    res.status(400).json({error: error.message}); 
+  }
+});
 
 // No modificar nada debajo de esta línea
 module.exports = router;

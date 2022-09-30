@@ -12,7 +12,16 @@ const takeBook = require('../controllers/05-controller')
     - Recordá chequear el mensaje del error y devolver la respuesta dependiendo del mismo. 
 */
 
-// router.get('/book/:id', (req, res) => {})
+router.get('/book/:id', (req, res) => {
+  try {
+    const { id, quantity } = req.body;
+    const book = takeBook(id, quantity);
+    res.json(book);
+    
+  } catch (error) {
+    res.status(400).json({error: error.message});
+  }
+})
 
 //No modificar nada debajo de esta linea
 module.exports = router
