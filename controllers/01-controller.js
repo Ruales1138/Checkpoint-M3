@@ -17,9 +17,13 @@ const utils = require('../utils');
   - Recordá que el mensaje de error deben ser exactamente como pide el enunciado
   - Encontrar una manera para extraer solo los id de la base de datos y de los libros que te dan por props en la función addBook.
   */  
-
+ 
 const addBook = (book) => {
-  
+  book.forEach(libro => {
+    let filteredBook = utils.books.find(e => e.id === libro.id)
+    if(filteredBook) throw new Error('ya esta el libro en la base de datos.')
+    else utils.books.push(libro)
+  })
 }
 // ⚠️ No modificar nada debajo de esta línea ⚠️
 module.exports = addBook;
