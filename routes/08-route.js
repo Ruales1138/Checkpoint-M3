@@ -11,7 +11,7 @@ const listBooks = require('../controllers/02-controller');
     - Si algo falla al traer las categorías, debes responder con un status code 400 y el mensaje del error!
 */
 
-// router.get('/books', (req, res) => {});
+router.get('/books', (req, res) => {});
   
 // No modificar nada debajo de esta línea
 module.exports = router;

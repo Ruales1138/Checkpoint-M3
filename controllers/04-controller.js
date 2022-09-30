@@ -17,22 +17,12 @@ const utils = require("../utils");
 
 const deleteBook = (id) => {
   // ⚠️ No modificar nada arriba de esta línea ⚠️
-  // utils.books.find(e => {
-  //   if(e.id !== parseInt(id)) {
-  //     throw new Error('no existe el libro con id: ' + id)
-  //   }
-  //   if(e.id === parseInt(id)) {
-  //     utils.books.pop(e)
-  //   } 
-  //   return utils.books
-  // })
-
-  let filteredBook = utils.books.find(e => e.id === parseInt(id))
+  let filteredBook = utils.books.find(e => e.id === id)
 
   if(!filteredBook) throw new Error(`no existe el libro con id: ${id}`)
   else {
-    utils.books = utils.books.filter(e => e.id !== parseInt(id))
-    return utils.books
+    utils.books = utils.books.filter(e => e.id !== id)
+    return utils.books 
   }
 };
 
